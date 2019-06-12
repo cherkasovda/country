@@ -11,8 +11,7 @@ class CardComponent extends Component {
                 <Card>
                     <Accordion.Toggle as={Button} eventKey="1">
                         <p className="card-title mr-5 float-left " key={country.numericCode}>{country.name}</p>
-                        {console.log(country.numericCode)}
-                         <img className="float-right" src={country.flag} alt="" />
+                        <img className="float-right" src={country.flag} alt="" />
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey="1">
                         <Card.Body>
@@ -28,10 +27,10 @@ class CardComponent extends Component {
                                 <Col>Region:  </Col>
                                 <Col> {country.subregion}</Col>
                             </Row>
-                            <Row>
+                            {/* <Row>
                                 <Col>Currencies:  </Col>
                                 <Col> {country.currencies[0].name}</Col>
-                            </Row>
+                            </Row> */}
                         </Card.Body>
                     </Accordion.Collapse>
                 </Card>

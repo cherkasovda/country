@@ -48,7 +48,7 @@ class App extends React.Component {
         <h2 className="mt-3 mx-auto">Countries Europe</h2>
         <div className="container d-flex">
           <SearchPanel onSearchChange={this.searchChange} />
-          <Popup onItemAdded={this.addItem} />
+          <Popup onItemAdd={this.addItem} />
         </div>
         <div>
           {visibleItems.map(country => {

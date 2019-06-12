@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './item-add-form.css';
 import { Form, Button, Col } from "react-bootstrap"
+// import icon from './death-star.png'
 
 
 export default class ItemAddForm extends Component {
@@ -12,6 +13,7 @@ export default class ItemAddForm extends Component {
             population: '',
             subregion: '',
             currencies: ''
+            // flag: ''
         };
     }
     numericCode = 1001;
@@ -24,29 +26,31 @@ export default class ItemAddForm extends Component {
             capital: '',
             population: '',
             subregion: '',
-            currencies: '',
+            //  flag: <img src = {icon}/>,
+            // currencies: '',
             numericCode: this.numericCode++
+           
         });
     };
 
-    onItemChangeCap = (e, propName) => {
-        this.setState({ [propName]: e.target.value });
+    // onItemChange = (e, propName) => {
+    //     this.setState({ [propName]: e.target.value });
+    // };
+    onItemChangeName = e => {
+        this.setState({ name: e.target.value });
     };
-    // onItemChangeName = e => {
-    //     this.setState({ name: e.target.value });
-    // };
 
-    // onItemChangeCap = e => {
-    //     this.setState({ capital: e.target.value });
-    // };
+    onItemChangeCap = e => {
+        this.setState({ capital: e.target.value });
+    };
 
-    // onItemChangePop = e => {
-    //     this.setState({ population: e.target.value });
-    // };
+    onItemChangePop = e => {
+        this.setState({ population: e.target.value });
+    };
 
-    // onItemChangeReg = e => {
-    //     this.setState({ subregion: e.target.value });
-    // };
+    onItemChangeReg = e => {
+        this.setState({ subregion: e.target.value });
+    };
     // onItemChangeCur = e => {
     //     this.setState({ currencies: e.target.value });
     // };
@@ -61,44 +65,67 @@ export default class ItemAddForm extends Component {
     //     });
     // };
 
-   
+
     render() {
         return (
             <Form onSubmit={this.onSubmit}>
                 <Form.Row>
                     <Form.Group as={Col} controlId="formName" >
                         <Form.Label>Country</Form.Label>
-                        <Form.Control type="text" placeholder="Enter name country" onChange={this.onItemChange}
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter name country"
+                            // onChange={this.onItemChange}
+                            onChange={this.onItemChangeName}
+
                             value={this.state.name}
-                        propName='name'/>
+                            propName="name" />
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formCapital">
                         <Form.Label>Capital</Form.Label>
-                        <Form.Control type="text" placeholder="Enter capital of country" onChange={this.onItemChange}
-                            value={this.state.capital} 
-                            propName='capital'/>
+                        <Form.Control
+                            type="text"
+                            placeholder="Enter capital of country"
+                            // onChange={this.onItemChange}
+                            onChange={this.onItemChangeCap}
+
+                            value={this.state.capital}
+                            propName='capital' />
                     </Form.Group>
                 </Form.Row>
 
                 <Form.Group as={Col} controlId="formPopul">
                     <Form.Label>Population</Form.Label>
-                    <Form.Control type="number" placeholder="Enter population" onChange={this.onItemChange}
+                    <Form.Control type="number"
+                        placeholder="Enter population"
+                        // onChange={this.onItemChange}
+                        onChange={this.onItemChangePop}
+
                         value={this.state.population}
                         propName='population' />
                 </Form.Group>
-                <Form.Group as={Col} controlId="formCurr">
+                {/* <Form.Group as={Col} controlId="formCurr">
                     <Form.Label>Currencies</Form.Label>
-                    <Form.Control type="text" placeholder="Enter currencies" onChange={this.onItemChange}
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter currencies"
+                        // onChange={this.onItemChange}
+                        onChange={this.onItemChangeCur}
+
                         value={this.state.currencies}
                         propName='currencies' />
-                </Form.Group>
+                </Form.Group> */}
 
                 <Form.Group as={Col} controlId="formRegion">
                     <Form.Label>Region</Form.Label>
-                    <Form.Control as="select" onChange={this.onItemChange}
+                    <Form.Control
+                        as="select"
+                        // onChange={this.onItemChange}
+                        onChange={this.onItemChangeReg}
+
                         value={this.state.subregion}
-                    propName='region'>
+                        propName='region'>
                         <option>Choose...</option>
                         <option>...Europe</option>
                         <option>West Europe</option>

@@ -23,6 +23,7 @@ class Popup extends React.Component {
     }
 
     render() {
+        const {onItemAdd} = this.props
         return (
             <>
                 <Button variant="primary" onClick={this.handleShow}>
@@ -34,7 +35,7 @@ class Popup extends React.Component {
                         <Modal.Title>Modal heading</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <ItemAddForm />
+                        <ItemAddForm onItemAdded={onItemAdd} />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>
