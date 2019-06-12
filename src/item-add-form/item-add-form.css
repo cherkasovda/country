@@ -1,0 +1,9 @@
+.item-add-form {
+    margin-top: 10px;
+    display: flex;
+}
+.new-item-name {
+    margin-right: 10px;
+    flex-grow: 1;
+    width: auto;
+}
