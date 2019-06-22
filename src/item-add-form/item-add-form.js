@@ -12,59 +12,36 @@ export default class ItemAddForm extends Component {
             capital: '',
             population: '',
             subregion: '',
-            currencies: ''
-            // flag: ''
+            currencies: [{}]
+              // flag: ''
         };
     }
-    numericCode = 1001;
+    id = 1001;
     onSubmit = (e) => {
         e.preventDefault();
         this.props.onItemAdded(this.state);
-
         this.setState({
             name: '',
             capital: '',
             population: '',
             subregion: '',
             //  flag: <img src = {icon}/>,
-            // currencies: '',
-            numericCode: this.numericCode++
-           
+            currencies: [{}],
+            id: this.id++
         });
+
+        console.log(this.state.currencies)
     };
-
-    // onItemChange = (e, propName) => {
-    //     this.setState({ [propName]: e.target.value });
-    // };
-    onItemChangeName = e => {
-        this.setState({ name: e.target.value });
+    onItemChange = e => {
+        if (e.target.title === 'currencies')
+            this.setState({
+                currencies: [
+                    { name: e.target.value }
+                ]
+            });
+        else
+            this.setState({ [e.target.title]: e.target.value });
     };
-
-    onItemChangeCap = e => {
-        this.setState({ capital: e.target.value });
-    };
-
-    onItemChangePop = e => {
-        this.setState({ population: e.target.value });
-    };
-
-    onItemChangeReg = e => {
-        this.setState({ subregion: e.target.value });
-    };
-    // onItemChangeCur = e => {
-    //     this.setState({ currencies: e.target.value });
-    // };
-
-    // onItemChangeName = e => {
-    //     this.setState({
-    //         name: e.target.value,
-    //         capital: e.target.value,
-    //         population: e.target.value,
-    //         subregion: e.target.value,
-    //         currencies: e.target.value
-    //     });
-    // };
-
 
     render() {
         return (
@@ -75,11 +52,9 @@ export default class ItemAddForm extends Component {
                         <Form.Control
                             type="text"
                             placeholder="Enter name country"
-                            // onChange={this.onItemChange}
-                            onChange={this.onItemChangeName}
-
+                            onChange={this.onItemChange}
                             value={this.state.name}
-                            propName="name" />
+                            title="name" />
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formCapital">
@@ -87,11 +62,9 @@ export default class ItemAddForm extends Component {
                         <Form.Control
                             type="text"
                             placeholder="Enter capital of country"
-                            // onChange={this.onItemChange}
-                            onChange={this.onItemChangeCap}
-
+                            onChange={this.onItemChange}
                             value={this.state.capital}
-                            propName='capital' />
+                            title='capital' />
                     </Form.Group>
                 </Form.Row>
 
@@ -99,33 +72,27 @@ export default class ItemAddForm extends Component {
                     <Form.Label>Population</Form.Label>
                     <Form.Control type="number"
                         placeholder="Enter population"
-                        // onChange={this.onItemChange}
-                        onChange={this.onItemChangePop}
-
+                        onChange={this.onItemChange}
                         value={this.state.population}
-                        propName='population' />
+                        title='population' />
                 </Form.Group>
-                {/* <Form.Group as={Col} controlId="formCurr">
+                <Form.Group as={Col} controlId="formCurr">
                     <Form.Label>Currencies</Form.Label>
                     <Form.Control
                         type="text"
                         placeholder="Enter currencies"
-                        // onChange={this.onItemChange}
-                        onChange={this.onItemChangeCur}
-
-                        value={this.state.currencies}
-                        propName='currencies' />
-                </Form.Group> */}
+                        onChange={this.onItemChange}
+                        // value={this.state.currencies[0].name}
+                        title='currencies' />
+                </Form.Group>
 
                 <Form.Group as={Col} controlId="formRegion">
                     <Form.Label>Region</Form.Label>
                     <Form.Control
                         as="select"
-                        // onChange={this.onItemChange}
-                        onChange={this.onItemChangeReg}
-
+                        onChange={this.onItemChange}
                         value={this.state.subregion}
-                        propName='region'>
+                        title='subregion'>
                         <option>Choose...</option>
                         <option>...Europe</option>
                         <option>West Europe</option>
