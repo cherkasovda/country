@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './item-add-form.css';
 import { Form, Button, Col } from "react-bootstrap"
-// import icon from './death-star.png'
+import Icon from './roger.jpg'
 
 
 export default class ItemAddForm extends Component {
@@ -12,8 +12,8 @@ export default class ItemAddForm extends Component {
             capital: '',
             population: '',
             subregion: '',
-            currencies: [{}]
-              // flag: ''
+            currencies: [{}],
+              flag: ''
         };
     }
     id = 1001;
@@ -25,11 +25,10 @@ export default class ItemAddForm extends Component {
             capital: '',
             population: '',
             subregion: '',
-            //  flag: <img src = {icon}/>,
+             flag: {Icon},
             currencies: [{}],
             id: this.id++
         });
-
         console.log(this.state.currencies)
     };
     onItemChange = e => {
@@ -44,6 +43,7 @@ export default class ItemAddForm extends Component {
     };
 
     render() {
+        const{handleClose}=this.props
         return (
             <Form onSubmit={this.onSubmit}>
                 <Form.Row>
@@ -82,7 +82,6 @@ export default class ItemAddForm extends Component {
                         type="text"
                         placeholder="Enter currencies"
                         onChange={this.onItemChange}
-                        // value={this.state.currencies[0].name}
                         title='currencies' />
                 </Form.Group>
 
@@ -94,15 +93,18 @@ export default class ItemAddForm extends Component {
                         value={this.state.subregion}
                         title='subregion'>
                         <option>Choose...</option>
-                        <option>...Europe</option>
-                        <option>West Europe</option>
-                        <option>East Europe</option>
-                        <option>Nord Europe</option>
+                       <option>Western Europe</option>
+                        <option>Eastern Europe</option>
+                        <option>Northern Europe</option>
+                        <option>Southern Europe</option>
                     </Form.Control>
                 </Form.Group>
                 <Button variant="primary" type="submit" >
                     Add country
               </Button>
+                <Button variant="secondary" onClick={handleClose}>
+                    Close
+            </Button>
             </Form>
 
         )

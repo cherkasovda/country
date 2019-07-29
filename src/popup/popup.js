@@ -1,24 +1,20 @@
-import React, { Component, Fragment} from "react"
+import React, { Component, Fragment } from "react"
 import { Modal, Button } from "react-bootstrap"
 import ItemAddForm from "../item-add-form/item-add-form"
 
 class Popup extends Component {
     constructor(props, context) {
         super(props, context);
-
-        this.handleShow = this.handleShow.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-
         this.state = {
             show: false,
         };
     }
 
-    handleClose() {
+    handleClose = () => {
         this.setState({ show: false });
     }
 
-    handleShow() {
+    handleShow = () => {
         this.setState({ show: true });
     }
 
@@ -34,13 +30,10 @@ class Popup extends Component {
                         <Modal.Title>Modal heading</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <ItemAddForm onItemAdded={this.props.onItemAdded} />
+                        <ItemAddForm onItemAdded={this.props.onItemAdded}
+                            handleClose={this.handleClose}
+                        />
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.handleClose}>
-                            Close
-            </Button>
-                    </Modal.Footer>
                 </Modal>
             </Fragment>
         );

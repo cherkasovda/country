@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
 import { countryData } from "../countryData";
-import SearchPanel from "../search-panel/search-panel"
-import CardComponent from "../country-details/country-details"
-// import ItemAddForm from "../item-add-form/item-add-form"
-import Popup from '../popup/popup';
-import { Accordion } from 'react-bootstrap';
+import ItemCountry from '../listcountry/listcountry';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import FavCountry from '../favor-country/fav-country';
+import Header from "../header/header"
 
+// import { SwapiServiceProvider } from "../swapi-service-context/swapi-service-context"
 
 class App extends React.Component {
   constructor() {
@@ -14,22 +14,29 @@ class App extends React.Component {
     this.state = {
 
       countries: countryData,
-      term: ''
+      term: '',
+      filterCountries: ''
     }
-    
-  }
-  
-  componentDidMount() {
-  const newC = this.state.countries;
-  newC.forEach(function (el, i) {
-    newC[i].id = i;
-  });
-  this.setState({ countries: newC })
-}
-  addItem = (newCountry) => {
-    // 1 - сгенерировать уникальный id
-    // 2 - добавить элемент в массив
+  };
+  onItemChangeCountry = e => {
+    const newCountriesList = this.state.countries.map(country => {
+      if (e.target.value === country.name) {
+        country.inFav = true
+      }
+      return country
+    })
+    this.setState({ countries: newCountriesList });
+  };
 
+
+  componentDidMount() {
+    const newC = this.state.countries;
+    newC.forEach(function (el, i) {
+      newC[i].id = i;
+    });
+    this.setState({ countries: newC })
+  }
+  addItem = (newCountry) => {
     this.setState(({ countries }) => {
       return {
         countries: [
@@ -39,7 +46,43 @@ class App extends React.Component {
       }
     });
   };
+  ;
 
+  deleteFavCountry = id => {
+    const updateCountries = this.state.countries.map(country => {
+      if (id === country.id) {
+        country.inFav = false;
+      }
+      return country
+    });
+    this.setState({
+      countries: updateCountries
+    });
+  };
+  deleteCountry = (id) => {
+    const updateCountries = this.state.countries.filter(item => item.id !== id);
+    this.setState({
+      countries: updateCountries
+    });
+  };
+
+  onFilterChange = filterCountries => {
+    console.log(filterCountries)
+
+
+    const visibleCountries = this.state.countries.map(country => {
+      if (filterCountries === country.subregion || filterCountries === 'All') {
+        country.isVisible = 1
+      } else {
+        country.isVisible = 0
+      }
+      return country
+    })
+    this.setState({ countries: visibleCountries });
+    console.log(this.state.countries)
+
+
+  };
   search(items, term) {
     if (!term.length) return items;
     return items.filter(item => item.name.toLowerCase().indexOf(term.toLowerCase()) > -1);// РёС‰РµС‚ РїРѕРґСЃС‚СЂРѕРєСѓ РІ СЃС‚СЂРѕРєРµ
@@ -48,26 +91,36 @@ class App extends React.Component {
     this.setState({ term })
   };
   render() {
-
+    const countriesState = this.state.countries;
     const visibleItems = this.search(this.state.countries, this.state.term)
     return (
+      <Router>
+        <React.Fragment>
+          <Header onItemAdded={this.addItem}
+            onSearchChange={this.searchChange}
+            onFilterChange={this.onFilterChange}
+          />
 
-      <React.Fragment>
-        <h2 className="mt-3 mx-auto">Countries Europe</h2>
-        <div className="container d-flex">
-          <SearchPanel onSearchChange={this.searchChange} />
-          <Popup onItemAdded={this.addItem} />
-        </div>
-        <Accordion>
-          {visibleItems.map((country, i) => {
-            return (
-              <CardComponent
-                country={country} eventKey={i} key={i}/>
-            );
-          })}
-        </Accordion>
-      </React.Fragment>
+          {/* <StateContext.Provider value={visibleItems}> */}
+
+          <Switch >
+            <Route exact path="/" render={() => (<Redirect to="/listcountry" />)} />
+            <Route path="/listcountry" render={() => <ItemCountry listCountry={visibleItems}
+              onDeleted={this.deleteCountry} />} />
+            <Route path="/favcountry" render={() => <FavCountry countriesState={countriesState}
+              listCountry={visibleItems}
+              deleteFavCountry={this.deleteFavCountry}
+              onItemChangeCountry={this.onItemChangeCountry}
+            />} />
+
+
+          </Switch>
+          {/* </StateContext.Provider> */}
+        </React.Fragment>
+      </Router>
+
     )
   }
 }
 export default App;
+

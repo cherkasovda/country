@@ -1,3 +1,4 @@
+
 .App {
   text-align: center;
 }
@@ -30,4 +31,103 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+img {
+    width:  50px;
+    height: 30px;
+}
+.card-body {
+    width: 80%;
+}
+.card-title{
+  flex-grow: 2;
+  text-align: left;
+}
+.card-body col {
+    display: inline-block;
+    width: 45%;
+}
+#root {
+  font-size:  20px;
+    max-width: 80%;
+    margin: 0 auto;
+  display: grid;
+  grid-template-rows:  80px 70px 1fr;
+    grid-template-columns:  300px 5fr;
+   grid-template-areas:  "h h" "n c" "n a"
+
+}
+.header {
+grid-area: h;
+margin: 0 auto;
+font-size:   30px;
+margin-top: 15px;
+}
+.navbar{
+  grid-area: n;
+  display:  flex;
+  flex-direction: column;
+  border: none;
+  align-items: normal;
+      justify-content: flex-start;
+}
+.navbar a, .navbar button{
+  margin-bottom: 15px;
+}
+.contant{
+  grid-area: c;
+  padding: 0;
+}
+.accord{
+    grid-area: a;
+    margin-top: 30px
+
+}
+.search-input {
+   
+    max-height: 50px;
+}
+.delete {
+  border-radius:  50%;
+  width: 30px;
+  height: 30px;
+}
+.delete img{
+  width: 30px;
+  height: 30px;
+}
+.accordcont{
+  display: flex;
+  justify-content: space-between
+}
+.navbar .active{
+  background: #0c1f2b;
+}
+.navbar a{
+background-image: linear-gradient(#484e55, #3A3F44 60%, #313539);
+    background-repeat: no-repeat;
+    text-decoration: none;
+    border-color: rgba(0, 0, 0, 0.6);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+        font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+        border: 1px solid transparent;
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    border-color: rgba(0, 0, 0, 0.6);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    
+    }
+   .navbar a:hover {
+    
+    background: rgba(0, 0, 0, 0.5);
+        border-color: #232628;
+}
+.formgroup {
+
+  padding: 60px 0 0 ;
 }
