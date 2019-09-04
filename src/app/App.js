@@ -76,16 +76,70 @@ class App extends React.Component {
     })
     this.setState({ countries: visibleCountries });
   };
+  // onSortChange = () => {
+  //   const updateCountries = this.state.countries.sort(
+  //     function compareValues(key, order = 'asc') {
+  //       return function (a, b) {
+  //         if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+  //           return 0;
+  //         }
+  //         const varA = (typeof a[key] === 'string') ?
+  //           a[key].toUpperCase() : a[key];
+  //         const varB = (typeof b[key] === 'string') ?
+  //           b[key].toUpperCase() : b[key];
+  //         let comparison = 0;
+  //         if (varA > varB) {
+  //           comparison = 1;
+  //         } else if (varA < varB) {
+  //           comparison = -1;
+  //         }
+  //         return (
+  //           (order === 'desc') ? (comparison * -1) : comparison
+  //         );
+  //       };
+  //     })
+  //   this.setState({ countries: updateCountries });
+  // }
 
-  sortByField= () => {
-    const sortCountries = this.state.countries.sort(function (a, b) { return a.region < b.region ? -1 : 1 });
-    this.setState({
-      countries: sortCountries
-    });
-  };
-  clickSortName = () =>{
-    console.log(1111)
-
+  onSortPopulation = () => {
+    const updateCountries = this.state.countries.sort(function compare(a, b) {
+      let comparison = 0;
+      if (a.population > b.population) {
+        comparison = 1;
+      } else if (a.population < b.population) {
+        comparison = -1;
+      }
+      return comparison;
+    })
+    this.setState({ countries: updateCountries });
+  }
+  onSortName = () => {
+    const updateCountries = this.state.countries.sort(function compare(a, b) {
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      let comparison = 0;
+      if (nameA > nameB) {
+        comparison = 1;
+      } else if (nameA < nameB) {
+        comparison = -1;
+      }
+      return comparison;
+    })
+    this.setState({ countries: updateCountries });
+  }
+  onSortRegion = () => {
+    const updateCountries = this.state.countries.sort(function compare(a, b) {
+      const regionA = a.subregion.toUpperCase();
+      const regionB = b.subregion.toUpperCase();
+      let comparison = 0;
+      if (regionA > regionB) {
+        comparison = 1;
+      } else if (regionA < regionB) {
+        comparison = -1;
+      }
+      return comparison;
+    })
+    this.setState({ countries: updateCountries });
   }
   search(items, term) {
     if (!term.length) return items;
@@ -103,8 +157,10 @@ class App extends React.Component {
           <Header onItemAdded={this.addItem}
             onSearchChange={this.searchChange}
             onFilterChange={this.onFilterChange}
-            onSortByField={this.sortByField}
-            onClickSortName={this.clickSortName}
+            onSortPopulation={this.onSortPopulation}
+            onSortName={this.onSortName}
+            onSortRegion={this.onSortRegion}
+            onSortChange={this.onSortChange}
 
           />
           <Switch >
@@ -126,4 +182,3 @@ class App extends React.Component {
   }
 }
 export default App;
-

@@ -20,9 +20,9 @@ export default class SearchPanel extends Component {
         this.setState({ filterCountries });
         this.props.onFilterChange(filterCountries);
     };
- 
+
     render() {
-        const { clickSortName, clickSortPopulation,  onSortByField } = this.props;
+        const { onSortName, onSortRegion, onSortPopulation, onSortChange } = this.props;
 
         return (
             <React.Fragment>
@@ -41,13 +41,13 @@ export default class SearchPanel extends Component {
                         <option>Southern Europe</option>
                     </Form.Control>
                 </Form.Group>
-                <Button variant="primary" onClick={clickSortName}>
+                <Button variant="primary" onClick={onSortName}>
                     Sort Name
                    </Button>
-                <Button variant="primary" onClick={clickSortPopulation}>
+                <Button variant="primary" onClick={onSortPopulation}          >
                     Sort Population
                     </Button>
-                <Button variant="primary" onClick={onSortByField} >Sort Region
+                <Button variant="primary" onClick={onSortRegion} >Sort Region
                          </Button>
             </React.Fragment>
         )

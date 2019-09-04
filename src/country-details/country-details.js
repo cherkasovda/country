@@ -12,10 +12,8 @@ class CardComponent extends Component {
                 <Accordion.Toggle  className='accordcont' as={Button} eventKey={eventKey}>
                     <p className="card-title mr-5" >{country.name}</p>
                     <img className="float-right" src={country.flag} alt="" />
-                    {/* <Button className='delete' variant="secondary" size="sm" onClick={() => onDeleted(country.id)}> */}
-                        <img src={DeleteImg} alt='delete' onClick={() => onDeleted(country.id)}/>
-            {/* </Button> */}
-                </Accordion.Toggle>
+                    <img src={DeleteImg} alt='delete' onClick={() => onDeleted(country.id)}/>
+                 </Accordion.Toggle>
                 <Accordion.Collapse eventKey={eventKey}>
                     <Card.Body>
                         <Row>
