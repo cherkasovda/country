@@ -30,11 +30,13 @@ class FavCountry extends React.Component {
                     </Form.Control>
                 </Form.Group>
                 <Accordion className="accord">
-                    {listCountry.map((country, i) => country.inFav ? <CardComponent
+                    {listCountry.map((country, i) => country.inFav ?
+                        <CardComponent
                         country={country} eventKey={i} key={i}
                         onDeleted={deleteFavCountry} /> : null
                     )}
                 </Accordion>
+         
             </React.Fragment>
         );
     }

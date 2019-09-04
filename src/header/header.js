@@ -4,7 +4,7 @@ import Popup from '../popup/popup';
 import {NavLink} from "react-router-dom"
 
 
-const Header = ({ onItemAdded, onSearchChange, onFilterChange }) => {
+const Header = ({ onItemAdded, onSearchChange, onFilterChange, onSortByField, clickSortName }) => {
 return (
 
 <React.Fragment>
@@ -15,6 +15,8 @@ return (
             <Popup onItemAdded={onItemAdded} />
             <SearchPanel onSearchChange={onSearchChange}
                 onFilterChange={onFilterChange}
+                onSortByField={onSortByField}
+                onClickSortName={clickSortName}
             />
 
         </nav>

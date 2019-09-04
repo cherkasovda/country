@@ -12,7 +12,6 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-
       countries: countryData,
       term: '',
       filterCountries: ''
@@ -46,7 +45,7 @@ class App extends React.Component {
       }
     });
   };
-  ;
+
 
   deleteFavCountry = id => {
     const updateCountries = this.state.countries.map(country => {
@@ -67,9 +66,6 @@ class App extends React.Component {
   };
 
   onFilterChange = filterCountries => {
-    console.log(filterCountries)
-
-
     const visibleCountries = this.state.countries.map(country => {
       if (filterCountries === country.subregion || filterCountries === 'All') {
         country.isVisible = 1
@@ -79,10 +75,18 @@ class App extends React.Component {
       return country
     })
     this.setState({ countries: visibleCountries });
-    console.log(this.state.countries)
-
-
   };
+
+  sortByField= () => {
+    const sortCountries = this.state.countries.sort(function (a, b) { return a.region < b.region ? -1 : 1 });
+    this.setState({
+      countries: sortCountries
+    });
+  };
+  clickSortName = () =>{
+    console.log(1111)
+
+  }
   search(items, term) {
     if (!term.length) return items;
     return items.filter(item => item.name.toLowerCase().indexOf(term.toLowerCase()) > -1);// РёС‰РµС‚ РїРѕРґСЃС‚СЂРѕРєСѓ РІ СЃС‚СЂРѕРєРµ
@@ -99,10 +103,10 @@ class App extends React.Component {
           <Header onItemAdded={this.addItem}
             onSearchChange={this.searchChange}
             onFilterChange={this.onFilterChange}
+            onSortByField={this.sortByField}
+            onClickSortName={this.clickSortName}
+
           />
-
-          {/* <StateContext.Provider value={visibleItems}> */}
-
           <Switch >
             <Route exact path="/" render={() => (<Redirect to="/listcountry" />)} />
             <Route path="/listcountry" render={() => <ItemCountry listCountry={visibleItems}
@@ -115,7 +119,6 @@ class App extends React.Component {
 
 
           </Switch>
-          {/* </StateContext.Provider> */}
         </React.Fragment>
       </Router>
 

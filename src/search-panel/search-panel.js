@@ -13,18 +13,17 @@ export default class SearchPanel extends Component {
         const term = e.target.value;
         this.setState({ term });
         this.props.onSearchChange(term);
-        // console.log(this.state)
 
     }
     changeFilter = e => {
         const filterCountries = e.target.value;
         this.setState({ filterCountries });
-
         this.props.onFilterChange(filterCountries);
-        // console.log(this.state)
     };
-
+ 
     render() {
+        const { clickSortName, clickSortPopulation,  onSortByField } = this.props;
+
         return (
             <React.Fragment>
                 <input placeholder="search" className='form-control search-input'
@@ -33,7 +32,6 @@ export default class SearchPanel extends Component {
                     <Form.Label>Filter by Region</Form.Label>
                     <Form.Control
                         as="select"
-                        //   value={this.state.filter}
                         onChange={this.changeFilter}
                         title='subregion'>
                         <option>All</option>
@@ -43,12 +41,13 @@ export default class SearchPanel extends Component {
                         <option>Southern Europe</option>
                     </Form.Control>
                 </Form.Group>
-                <Button variant="primary">
+                <Button variant="primary" onClick={clickSortName}>
                     Sort Name
                    </Button>
-                <Button variant="primary">
-                    Sort Population                     </Button>
-                <Button variant="primary">Sort Region
+                <Button variant="primary" onClick={clickSortPopulation}>
+                    Sort Population
+                    </Button>
+                <Button variant="primary" onClick={onSortByField} >Sort Region
                          </Button>
             </React.Fragment>
         )
